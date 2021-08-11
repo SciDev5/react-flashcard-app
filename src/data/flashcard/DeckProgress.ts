@@ -2,6 +2,7 @@ import { weightedRandom } from "../../util/arrayUtil";
 import CardProgress, { LearnMode as LearnCategory } from "./CardProgress";
 import DeckData from "./DeckData";
 
+const STARTING_CARDS = 5;
 
 export default class DeckProgress {
     _cardsByMode:{[key in LearnCategory]: CardProgress[]} = {activeLearning:[],activeReminder:[],inactive:[]};
@@ -56,13 +57,24 @@ export default class DeckProgress {
             value: card,
             weight: card.card.priority
         })));
-        if (cardToBegin)
+        if (cardToBegin) {
             this._startedCardsOrder.push(cardToBegin.card.id);
+            cardToBegin.learnMode = "activeLearning";
+        }
         else throw new Error("should not happen");
+    }
+    /** If no cards have been started, start one to kick it off. */
+    _beginCardIfNone():void {
+        if (this._startedCardsOrder.length === 0) {
+            for (let i = 0; i < STARTING_CARDS; i++)
+                this.beginCard();
+            this.recalculateCardsByMode();
+        }
     }
 
     /** Get the next card to quiz the user on. (selects from started cards) */
     nextCard():CardProgress {
+        this._beginCardIfNone();
         // Choose a mode and get its associated cards.
         const mode = this._getRandomLearnCategory();
         if (mode === null) throw new Error("No cards have been started, yet nextCard was called. Should not happen.");
@@ -76,7 +88,9 @@ export default class DeckProgress {
             value:card,
             weight:
                 ((i+1)/orderedCards.length + 0.3) *
-                ((card.priority-minCardPriority)/(maxCardPriority-minCardPriority) + 0.3)
+                ((maxCardPriority===minCardPriority ? 1 :
+                    (card.priority-minCardPriority)/(maxCardPriority-minCardPriority)
+                ) + 0.3)
         }));
         const card = weightedRandom(weightedCards);
         if (card === null)

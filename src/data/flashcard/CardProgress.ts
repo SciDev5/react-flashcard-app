@@ -5,8 +5,8 @@ export type LearnMode = "activeLearning"|"activeReminder"|"inactive";
 export default class CardProgress {
     learnMode: LearnMode;
     priority: number;
-    constructor(readonly card: CardData, learnMode: LearnMode, priority: number) {
-        this.learnMode = learnMode;
+    constructor(readonly card: CardData, priority: number, learnMode?: LearnMode) {
+        this.learnMode = learnMode ?? "activeLearning";
         this.priority = priority;
     }
 
