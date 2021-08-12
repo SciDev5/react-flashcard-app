@@ -8,7 +8,7 @@ let t:TFunction;
 
 const isDeveloper = process.env.NODE_ENV === "development";
 
-i18next.use(LanguageDetector).use(initReactI18next).init({
+const i18n = i18next.use(LanguageDetector).use(initReactI18next).init({
     /* debugger For Development environment */
     debug: isDeveloper,
 
@@ -43,3 +43,5 @@ i18next.use(LanguageDetector).use(initReactI18next).init({
     if (e) throw e;
     else t=tIn;
 });
+
+export default i18n;

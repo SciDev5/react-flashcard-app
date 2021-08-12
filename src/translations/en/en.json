@@ -1,5 +1,17 @@
 {
     "translations": {
-        
+        "flashcard": {
+            "flipCard": "See answer",
+            "nextCard": "Next card",
+            "modeSelect": {
+                "title": "Card Repeat Status:",
+                "activeLearning": "Active learning",
+                "activeReminder": "Reminder",
+                "inactive": "Well-known card"
+            },
+            "answerInfo": {
+                "title": "More informaion:"
+            }
+        }
     }
 }
