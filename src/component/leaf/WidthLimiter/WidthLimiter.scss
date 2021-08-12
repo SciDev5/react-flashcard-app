@@ -1,0 +1,14 @@
+
+.WidthLimiter {
+    display: flex;
+    align-content: center;
+    > .-content {
+        display: inline-block;
+        flex-grow: 0;
+        flex-shrink: 1;
+    }
+    > .-buffer {
+        content: "d";
+        flex: 1;
+    }
+}
