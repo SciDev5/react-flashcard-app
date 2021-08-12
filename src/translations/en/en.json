@@ -12,6 +12,10 @@
             "answerInfo": {
                 "title": "More informaion:"
             }
+        },
+        "header": {
+            "appName": "Flashcard Thing",
+            "mainPageLink": "Main page"
         }
     }
 }

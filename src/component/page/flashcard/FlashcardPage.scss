@@ -1,12 +1,8 @@
-
-
-$c-001: #454545;
-$c-002: #ffffff;
-$c-003: #333333;
-$c-004: #bbbbbb;
-$c-005: #efefef;
+@import "../../../color.scss";
 
 .FlashcardPage {
+    margin-top: 2em;
+
     .-TermRow, .-ButtonRow, .-ModeSelectorRow {
         width: 100%;
         display: block;
@@ -19,60 +15,65 @@ $c-005: #efefef;
         font-size: 1.3em;
         &.-em {
             border: none;
-            color: $c-002;
-            background: $c-001;
+            color: $c-b01;
+            background: $c-f02;
         }
         &:not(.-em) {
-            border: 1px dashed $c-001;
-            color: $c-003;
-            background: $c-002;
+            border: 1px dashed $c-f02;
+            color: $c-f01;
+            background: $c-b01;
         }
     }
     .-ButtonRow {
         padding: 5px 0px;
-        border: 1px solid $c-001;
-        background: $c-002;
-        color: $c-003;
+        border: 1px solid $c-f02;
+        background: $c-b01;
+        color: $c-f01;
         transition: 0.25s color, 0.25s background-color, 0.25s border;;
         &:hover {
-            background: $c-001;
-            color: $c-002;
+            background: $c-f02;
+            color: $c-b01;
         }
     }
     .-AnswerInfoHeader {
-        border-bottom: 1px solid $c-004;
+        border-bottom: 1px solid $c-e01;
         padding-bottom: .4em;
-        color: $c-001;
+        color: $c-f02;
     }
     .-AnswerInfo {
-        blockquote { border-inline-start: 3px solid $c-004; margin: 1em 1em; padding-inline-start: 0.5em; }
-        code { background: $c-005; padding: .2em .4em; border-radius: 4px;}
+        blockquote { border-inline-start: 3px solid $c-e01; margin: 1em 1em; padding-inline-start: 0.5em; }
+        code { background: $c-b02; padding: .2em .4em; border-radius: 4px;}
         img { max-width: 100%; }
         h1,h2 {
-            border-bottom: 1px solid $c-004;
+            border-bottom: 1px solid $c-e01;
             padding-bottom: .4em;
         }
         h1,h2,h3,h4,h5,h6 {
-            color: $c-001;
+            color: $c-f02;
         }
     }
     .-ModeSelectorRow {
-        background: $c-001;
-        color: $c-002;
+        background: $c-f02;
+        color: $c-b01;
+        label {
+            display: block;
+            padding: 0.3em;
+        }
         .-modes {
             display: flex;
+            padding: 0 .15em;
             button {
                 flex: 1;
-                padding: 5px;
-                margin: 5px;
+                padding: .3em;
+                margin: .3em .15em;
 
                 background: none;
-                color: $c-002;
-                border: 1px solid $c-002;
+                color: $c-b01;
+                border: 1px solid $c-b01;
                 transition: 0.25s background-color, 0.25s color, 0.25s border;
                 &.-sel, &:hover {
-                    background: $c-002;
-                    color: $c-003;
+                    background: $c-b01;
+                    color: $c-f01;
                 }
             }
         }

@@ -1,0 +1,21 @@
+@import "../../color.scss";
+
+.Header {
+    display: block;
+    border-bottom: 1px solid $c-e01;
+
+    a {
+        $h: 2.5em;
+        height: $h;
+        line-height: $h;
+        text-align: center;
+        display: inline-block;
+        color: $c-f01;
+        padding: 0 1em;
+    }
+
+    .-appName {
+        font-weight: bold;
+        border-right: 1px solid $c-e01;
+    }
+}
