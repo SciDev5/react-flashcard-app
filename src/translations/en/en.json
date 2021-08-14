@@ -1,5 +1,16 @@
 {
     "translations": {
+        "interpolation": {
+            "date": {
+                "never": "Never"
+            },
+            "error": {
+                "format": {
+                    "typeMismatch": "<<ERR: Formatting type mismatch>>",
+                    "noFormat": "<<ERR: Formatting name missing>>"
+                }
+            }
+        },
         "flashcard": {
             "flipCard": "See answer",
             "nextCard": "Next card",
@@ -13,8 +24,17 @@
                 "title": "More informaion:"
             }
         },
+        "app": {
+            "name": "Flashcard Thing"
+        },
+        "indexPage": {
+            "selectDeckHeader": "Select flashcard deck:",
+            "deckRow": {
+                "iconAlt": "Deck icon",
+                "description": "Cards: {{nCards,number}}; Started: {{nStarted,number}}; Last studied: {{lastStudy,dateTime}}"
+            }
+        },
         "header": {
-            "appName": "Flashcard Thing",
             "mainPageLink": "Main page"
         }
     }

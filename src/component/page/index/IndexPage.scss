@@ -1,0 +1,70 @@
+@import "../../../color.scss";
+
+$s: 70px;
+
+.IndexPage {
+    h1 { color: $c-f02; }
+    h3 { color: $c-f01; }
+
+    .-DeckList {
+        border: 1px solid $c-e01;
+        overflow-y: scroll;
+        > .-DeckRow {
+            &:not(:nth-last-child(1)) {
+                border-bottom: 1px solid $c-e01;
+            }
+            border-right: 1px solid $c-e01;
+
+            display: flex;
+            > * { height: $s; }
+            > .-icon {
+                flex: 0 0 $s;
+                width: $s;
+                height: $s;
+                text-align: center;
+                border-right: 1px solid $c-e01;
+                $gc1: $c-b01;
+                $gc2: $c-b02;
+                $gLen: 4px;
+                background: repeating-linear-gradient(45deg, $gc1, $gc1 $gLen, $gc2 $gLen, $gc2 $gLen*2);
+
+                > .-vAligner {
+                    vertical-align: middle;
+                    width: 0;
+                    height: 100%;
+                    display: inline-block;
+                }
+                img {
+                    max-width: 100%;
+                    max-height: 100%;
+                    vertical-align: middle;
+                    transition: 0.25s opacity;
+                }
+            }
+            > .-titleAndDesc {
+                flex: 1;
+                padding: .2em .5em;
+                span { display: block; }
+                .-title {
+                    font-size: 1em;
+                    margin-block-end: .2em;
+                    font-weight: bold;
+                    color: $c-f02;
+                }
+                .-desc {
+                    font-size: 0.95em;
+                    color: $c-f01;
+                }
+            }
+
+            transition: 0.25s background-color;
+            > .-icon > img { opacity: 0.6; }
+            &:hover {
+                background: $c-b02;
+                > .-icon {
+                    > img { opacity: 1; }
+                }
+            }
+        }
+    }
+}

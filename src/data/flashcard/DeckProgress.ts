@@ -5,8 +5,11 @@ import DeckData from "./DeckData";
 const STARTING_CARDS = 5;
 
 export default class DeckProgress {
-    _cardsByMode:{[key in LearnCategory]: CardProgress[]} = {activeLearning:[],activeReminder:[],inactive:[]};
-    _cardsById:{[key: string]: CardProgress} = {};
+    private _cardsByMode:{[key in LearnCategory]: CardProgress[]} = {activeLearning:[],activeReminder:[],inactive:[]};
+    private _cardsById:{[key: string]: CardProgress} = {};
+
+    private _lastStudied?: Date;
+    public get lastStudied(): Date | undefined { return this._lastStudied }
 
     modeWeights:{[key in LearnCategory]: number} = {
         activeLearning: 2,
@@ -47,6 +50,11 @@ export default class DeckProgress {
         }
     }
 
+    /** Set lastStudied to the current date. */
+    updateLastStudied():void {
+        this._lastStudied = new Date();
+    }
+
     /** Start a new card in the deck. */
     beginCard():void {
         const beginnableCards:CardProgress[] = this.progress.filter(v=>!this._startedCardsOrder.includes(v.card.id));
@@ -62,6 +70,7 @@ export default class DeckProgress {
             cardToBegin.learnMode = "activeLearning";
         }
         else throw new Error("should not happen");
+        this.updateLastStudied();
     }
     /** If no cards have been started, start one to kick it off. */
     _beginCardIfNone():void {
@@ -100,7 +109,11 @@ export default class DeckProgress {
         order.splice(order.indexOf(card.card.id),1);
         order.splice(0,0,card.card.id);
         
+        this.updateLastStudied();
         return card;
+    }
+    public getCardById(id:string):CardProgress {
+        return this._cardsById[id];
     }
 
     /** Select the next learning category to select a card from. */

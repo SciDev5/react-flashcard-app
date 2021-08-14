@@ -17,7 +17,7 @@ type PropsType = {decks: DeckProgress[]};
 function FlashcardPage(props:PropsType):JSX.Element {
     const {cardId,setId} = useParams<{cardId:string,setId:string}>();
     const deck = props.decks.find(v=>v.data.id===setId),
-        card = deck?._cardsById[cardId];
+        card = deck?.getCardById(cardId);
     // Redirect if card or deck is missing, otherwise render the page.
     if (!deck || !card) 
         return <FlashcardRandCardRedirect decks={props.decks}/>;

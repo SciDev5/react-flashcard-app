@@ -15,7 +15,7 @@ export default class App extends React.Component {
                 <Header/>
                 <Switch>
                     <Route path="/" exact>
-                        <IndexPage/>
+                        <IndexPage decks={data}/>
                     </Route>
                     <Route path="/flashcard/:setId/:cardId" exact>
                         <FlashcardPage decks={data} />

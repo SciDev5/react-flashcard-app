@@ -7,7 +7,7 @@ export default class Header extends React.Component {
     render():ReactNode {
         return (<Translation>{t=>(
             <nav className="Header">
-                <Link to="/" className="-appName" aria-label={t("header.mainPageLink")}>{t("header.appName")}</Link>
+                <Link to="/" className="-appName" aria-label={t("header.mainPageLink")}>{t("app.name")}</Link>
                 <Link to="/">{t("header.mainPageLink")}</Link>
             </nav>
         )}</Translation>);

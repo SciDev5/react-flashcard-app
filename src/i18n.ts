@@ -29,8 +29,13 @@ const i18n = i18next.use(LanguageDetector).use(initReactI18next).init({
             case "number":
                 if (typeof(value) === "number")
                     return value.toLocaleString(lang);
-                else return t("general.error.format.typeMismatch");
-            default: return t("general.error.format.noFormat");
+                else return t("interpolation.error.format.typeMismatch");
+            case "dateTime":
+                if (value === undefined) return t("interpolation.date.never");
+                else if (value instanceof Date)
+                    return value.toLocaleString(lang);
+                else return t("interpolation.error.format.typeMismatch");
+            default: return t("interpolation.error.format.noFormat");
             }
         }
     },
