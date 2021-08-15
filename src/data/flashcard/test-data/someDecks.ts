@@ -18,7 +18,7 @@ const deckDatas:DeckData[] = [
     },
     {
         id: "testB",
-        coverImgURL: "",
+        coverImgURL: "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png",
         name: "TestDeckB",
         cards: new Array(25).fill(0).map((_,i)=>({
             id: `B-${i}`,
@@ -28,7 +28,8 @@ const deckDatas:DeckData[] = [
             priority: 1/(i**0.4),
             reversable: i % 20 >= 10
         }))
-    }
+    },
+    ...new Array(20).fill(0).map(()=>({id:"I"+Math.random(),coverImgURL:"",name:"TEST",cards:[]}))
 ];
 
 

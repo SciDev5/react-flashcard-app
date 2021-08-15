@@ -3,11 +3,13 @@ import { Translation } from "react-i18next";
 import { ReactNode } from "react-markdown";
 import { Redirect } from "react-router-dom";
 import DeckProgress from "../../../data/flashcard/DeckProgress";
+import FALLBACK_ICON from "./rowIcon/missing.png";
 
-export default class DeckRow extends React.Component<{deck:DeckProgress},{wasClicked:boolean}> {
+
+export default class DeckRow extends React.Component<{deck:DeckProgress},{wasClicked:boolean,iconURL:string}> {
     constructor(props:DeckRow["props"]) {
         super(props);
-        this.state = {wasClicked:false};
+        this.state = {wasClicked:false,iconURL:props.deck.data.coverImgURL};
     }
     onInteract():void {
         this.setState({wasClicked: true});
@@ -25,6 +27,10 @@ export default class DeckRow extends React.Component<{deck:DeckProgress},{wasCli
             break;
         }
     };
+    onMisingIcon = (e:React.InvalidEvent<HTMLImageElement>):void => {
+        if (this.state.iconURL !== FALLBACK_ICON)
+            this.setState({iconURL:FALLBACK_ICON});
+    };
     render():ReactNode {
         const { deck } = this.props;
         const { data } = deck;
@@ -36,7 +42,7 @@ export default class DeckRow extends React.Component<{deck:DeckProgress},{wasCli
             <div className="-DeckRow" tabIndex={0} onClick={this.onClick} onKeyPress={this.onKeyPress}>
                 <div className="-icon">
                     <div className="-vAligner" />
-                    <img src={data.coverImgURL} alt={t("indexPage.deckRow.iconAlt")}/>
+                    <img src={this.state.iconURL} alt={t("indexPage.deckRow.iconAlt")} onError={this.onMisingIcon}/>
                 </div>
                 <div className="-titleAndDesc">
                     <span className="-title">{data.name}</span>
