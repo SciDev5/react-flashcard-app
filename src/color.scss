@@ -1,7 +1,49 @@
-$c-f01: #333333;
-$c-f02: #454545;
+$c-f01: var(--c-f01);
+$c-f02: var(--c-f02);
 
-$c-b01: #ffffff;
-$c-b02: #efefef;
+$c-b01: var(--c-b01);
+$c-b02: var(--c-b02);
 
-$c-e01: #cccccc;
+$c-e01: var(--c-e01);
+
+
+@mixin colors-dark {
+    --c-f01: #ffffff;
+    --c-f02: #d4d4d4;
+
+    --c-b01: #242424;
+    --c-b02: #4d4d4d;
+
+    --c-e01: #747474;
+}
+
+@mixin colors-light {
+    --c-f01: #333333;
+    --c-f02: #454545;
+
+    --c-b01: #ffffff;
+    --c-b02: #efefef;
+
+    --c-e01: #cccccc;
+}
+
+
+.ColorBoundary {
+    &.-detect {
+        @media (prefers-color-scheme: dark) {
+            @include colors-dark();
+        }
+        @media (prefers-color-scheme: light) {
+            @include colors-light();
+        }
+    }
+    &.-dark {
+        @include colors-dark();
+    }
+    &.-light {
+        @include colors-light();
+    }
+    background: $c-b01;
+    color: $c-f01;
+}
+

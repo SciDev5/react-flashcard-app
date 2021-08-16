@@ -2,6 +2,7 @@ import React, { ReactNode } from "react";
 import { Route, Switch } from "react-router-dom";
 import { testDecks } from "../data/flashcard/test-data/someDecks";
 import Header from "./header/Header";
+import ColorBoundary from "./leaf/ColorBoundary/ColorBoundary";
 import FlashcardPage from "./page/flashcard/FlashcardPage";
 import FlashcardRandCardRedirect from "./page/flashcard/FlashcardRandCardRedirect";
 import IndexPage from "./page/index/IndexPage";
@@ -10,8 +11,9 @@ const data = testDecks;
 
 export default class App extends React.Component {
     render():ReactNode {
+        // TODO, make theme customizable.
         return (
-            <>
+            <ColorBoundary mode="detect">
                 <Header/>
                 <Switch>
                     <Route path="/" exact>
@@ -27,7 +29,7 @@ export default class App extends React.Component {
                         404 TODO
                     </Route>
                 </Switch>
-            </>
+            </ColorBoundary>
         );
     }
 }

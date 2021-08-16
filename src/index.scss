@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Source+Code+Pro&display=swap');
+@import "./color.scss";
 
 * {
   box-sizing: border-box;
@@ -11,6 +12,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+#root, #root > .ColorBoundary {
+  left: 0; top: 0;
+  position: absolute;
+  height: 100%;
+  width: 100%;
 }
 
 code {
