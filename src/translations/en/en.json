@@ -24,6 +24,10 @@
             },
             "answerInfo": {
                 "title": "More informaion:"
+            },
+            "deck404Page": {
+                "title": "Deck not found",
+                "data": "Could not find deck by id `{{setId}}`"
             }
         },
         "app": {
