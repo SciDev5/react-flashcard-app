@@ -10,7 +10,7 @@ shows flashcards made with React.
 
 ## Copyright
 
-See `/COPYING`, the liscense applies to all files
+See `/LISCENSE`, the liscense applies to all files
 in this repository (including past commits).
 
 ## Installation
