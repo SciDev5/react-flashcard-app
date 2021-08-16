@@ -46,6 +46,17 @@ class FlashcardPageClass extends React.Component<{deck:DeckProgress,card:CardPro
             attemptReverse: Math.random() > 0.5
         });
     };
+    onBeginCard = ()=>{
+        const next = this.props.deck.beginCard()?.card.id;
+        if (next) {
+            this.setState({
+                next,
+                flipped: false,
+                attemptReverse: Math.random() > 0.5
+            });
+        } else
+            this.onNextCard();
+    };
 
     render():ReactNode {
         const { card, deck } = this.props, { flipped, next, attemptReverse } = this.state,
@@ -58,12 +69,15 @@ class FlashcardPageClass extends React.Component<{deck:DeckProgress,card:CardPro
             question = doReverse ? cardData.answer : cardData.question,
             answer = doReverse ? cardData.question : cardData.answer;
 
+        const canBeginCard = deck.hasBeginnableCards();
+
         return (<main className="FlashcardPage"><WidthLimiter width={600}>{
             flipped ? (/*Answer side*/<>
                 <TermRow data={question} />
                 <TermRow em data={answer} />
                 <ModeSelectorRow card={card} deck={deck} />
                 <ButtonRow text="flashcard.nextCard" onInteract={this.onNextCard}/>
+                <ButtonRow text={canBeginCard?"flashcard.beginNewCard":"flashcard.allCardsBegan"} onInteract={this.onBeginCard} disabled={!canBeginCard}/>
                 <AnswerInfoRow text={cardData.answerInfo}/>
             </>) : (/*Question side*/<>
                 <TermRow em data={question} />

@@ -2,8 +2,9 @@ import React from "react";
 import { Trans } from "react-i18next";
 import { ReactNode } from "react-markdown";
 
-export default class Button extends React.Component<{className?:string|(string|false)[],onInteract:()=>void,text:string}> {
+export default class Button extends React.Component<{className?:string|(string|false)[],onInteract:()=>void,text:string,disabled?:boolean}> {
     onInteract():void {
+        if (this.props.disabled) return;
         this.props.onInteract();
     }
     onClick = (e:React.MouseEvent):void => this.onInteract();
@@ -22,7 +23,8 @@ export default class Button extends React.Component<{className?:string|(string|f
             this.props.className?.filter(v=>v!==false).map(v=>(v as string).trim()).join(" ")
         )?.trim();
         return (
-            <button className={className} onClick={this.onClick} onKeyPress={this.onKeyPress}>
+            <button className={className} onClick={this.onClick} onKeyPress={this.onKeyPress}
+                disabled={this.props.disabled}>
                 <Trans>{this.props.text}</Trans>
             </button>
         );

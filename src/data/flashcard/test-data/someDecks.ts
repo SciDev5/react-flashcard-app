@@ -29,6 +29,19 @@ const deckDatas:DeckData[] = [
             reversable: i % 20 >= 10
         }))
     },
+    {
+        id: "testC",
+        coverImgURL: "",
+        name: "TestDeckC",
+        cards: new Array(7).fill(0).map(()=>({
+            id: Math.random()+"",
+            answer: {type:"text",data:"a"},
+            question: {type:"text",data:"q"},
+            answerInfo: "",
+            priority: 1,
+            reversable: false
+        }))
+    },
     ...new Array(20).fill(0).map(()=>({id:"I"+Math.random(),coverImgURL:"",name:"TEST",cards:[]}))
 ];
 

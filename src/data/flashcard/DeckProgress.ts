@@ -55,11 +55,17 @@ export default class DeckProgress {
         this._lastStudied = new Date();
     }
 
+    /** Check if there are any cards to begin */
+    hasBeginnableCards():boolean {
+        const beginnableCards:CardProgress[] = this.progress.filter(v=>!this._startedCardsOrder.includes(v.card.id));
+        return beginnableCards.length > 0;
+    }
+
     /** Start a new card in the deck. */
-    beginCard():void {
+    beginCard():null|CardProgress {
         const beginnableCards:CardProgress[] = this.progress.filter(v=>!this._startedCardsOrder.includes(v.card.id));
         if (beginnableCards.length === 0)
-            return; // There are no new cards to start, return.
+            return null; // There are no new cards to start, return.
         // Select the card by the card data weight (card.card.priority), card.priority is for selection. 
         const cardToBegin = weightedRandom(beginnableCards.map(card=>({
             value: card,
@@ -71,6 +77,7 @@ export default class DeckProgress {
         }
         else throw new Error("should not happen");
         this.updateLastStudied();
+        return cardToBegin;
     }
     /** If no cards have been started, start one to kick it off. */
     _beginCardIfNone():void {

@@ -30,9 +30,15 @@
         background: $c-b01;
         color: $c-f01;
         transition: 0.25s color, 0.25s background-color, 0.25s border;;
-        &:hover {
+        &:hover:not(:disabled) {
             background: $c-f02;
             color: $c-b01;
+        }
+        &:disabled {
+            opacity: 0.5;
+        }
+        + .-ButtonRow {
+            margin-top: -0.75em;
         }
     }
     .-AnswerInfoHeader {
