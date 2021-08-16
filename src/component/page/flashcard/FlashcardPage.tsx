@@ -69,7 +69,7 @@ class FlashcardPageClass extends React.Component<{deck:DeckProgress,card:CardPro
             question = doReverse ? cardData.answer : cardData.question,
             answer = doReverse ? cardData.question : cardData.answer;
 
-        const canBeginCard = deck.hasBeginnableCards();
+        const canBeginCard = deck.hasBeginnableCards;
 
         return (<main className="FlashcardPage"><WidthLimiter width={600}>{
             flipped ? (/*Answer side*/<>

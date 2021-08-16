@@ -6,8 +6,9 @@ import DeckProgress from "../../../data/flashcard/DeckProgress";
 export default function FlashcardRandCardRedirect(props:{decks:DeckProgress[]}):JSX.Element {
     const { setId } = useParams<{setId:string}>(),
         deck = props.decks.find(v => v.data.id === setId);
-    if (!deck)
+    if (!deck || !deck.hasCards) // Go to index if the deck is missing or doesn't have any cards.
         return <Redirect to="/"/>;
     else
         return <Redirect to={`/flashcard/${setId}/${deck.nextCard().card.id}`}/>;
+    
 }

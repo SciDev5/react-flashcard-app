@@ -56,9 +56,13 @@ export default class DeckProgress {
     }
 
     /** Check if there are any cards to begin */
-    hasBeginnableCards():boolean {
+    get hasBeginnableCards():boolean {
         const beginnableCards:CardProgress[] = this.progress.filter(v=>!this._startedCardsOrder.includes(v.card.id));
         return beginnableCards.length > 0;
+    }
+    /** Check if calling nextCard will break. */
+    get hasCards():boolean {
+        return this.data.cards.length > 0;
     }
 
     /** Start a new card in the deck. */

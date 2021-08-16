@@ -61,10 +61,15 @@ $s: 70px;
 
             transition: 0.25s background-color;
             > .-icon > img { opacity: 0.6; }
-            &:hover {
+            &:hover:not(.-disabled) {
                 background: $c-b02;
                 > .-icon {
                     > img { opacity: 1; }
+                }
+            }
+            &.-disabled {
+                > .-icon, > .-titleAndDesc {
+                    opacity: 0.4;
                 }
             }
         }

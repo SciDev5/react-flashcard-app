@@ -11,7 +11,11 @@ export default class DeckRow extends React.Component<{deck:DeckProgress},{wasCli
         super(props);
         this.state = {wasClicked:false,iconURL:props.deck.data.coverImgURL};
     }
+    get disabled():boolean {
+        return this.props.deck.data.cards.length === 0;
+    }
     onInteract():void {
+        if (this.disabled) return;
         this.setState({wasClicked: true});
     }
     onClick = (e:React.MouseEvent):void => {
@@ -34,12 +38,14 @@ export default class DeckRow extends React.Component<{deck:DeckProgress},{wasCli
     render():ReactNode {
         const { deck } = this.props;
         const { data } = deck;
+        const { disabled } = this;
 
         if (this.state.wasClicked)
             return <Redirect to={`/flashcard/${data.id}`}/>;
 
+
         return (<Translation>{t=>(
-            <div className="-DeckRow" tabIndex={0} onClick={this.onClick} onKeyPress={this.onKeyPress}>
+            <div className={"-DeckRow"+(disabled?" -disabled":"")} tabIndex={disabled?-1:0} onClick={this.onClick} onKeyPress={this.onKeyPress}>
                 <div className="-icon">
                     <div className="-vAligner" />
                     <img src={this.state.iconURL} alt={t("indexPage.deckRow.iconAlt")} onError={this.onMisingIcon}/>
