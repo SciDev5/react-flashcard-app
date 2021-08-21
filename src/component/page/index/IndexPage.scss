@@ -58,6 +58,20 @@ $s: 70px;
                     color: $c-f01;
                 }
             }
+            > .-editLink {
+                a {
+                    display: inline-block;
+                    padding: 0 .5em;
+                    color: $c-f01;
+                    line-height: $s;
+                    height: $s;
+                    transition: 0.25s background-color, 0.25s color;
+                    &:hover {
+                        background: $c-f01;
+                        color: $c-b01;
+                    }
+                }
+            }
 
             transition: 0.25s background-color;
             > .-icon > img { opacity: 0.6; }

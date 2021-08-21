@@ -37,7 +37,29 @@
             "selectDeckHeader": "Select flashcard deck:",
             "deckRow": {
                 "iconAlt": "Deck icon",
-                "description": "Cards: {{nCards,number}}; Started: {{nStarted,number}}; Last studied: {{lastStudy,dateTime}}"
+                "description": "Cards: {{nCards,number}}; Started: {{nStarted,number}}; Last studied: {{lastStudy,dateTime}}",
+                "edit": "Edit"
+            }
+        },
+        "editorPage": {
+            "title": "Edit deck \"{{name}}\"",
+            "deck": {
+                "label": "Deck data",
+                "name": "Name:",
+                "imgURL": "Cover image URL:"
+            },
+            "card": {
+                "label": "Card data",
+                "del": "Delete this card",
+                "new": "New card",
+                "reversable": "Reversable:",
+                "answerInfo": "Answer Info:",
+                "isImg": {
+                    "q": "Question is image?:",
+                    "a": "Answer is image?:"
+                },
+                "question": "Question [or img url]:",
+                "answer": "Answer [or img url]:"
             }
         },
         "header": {

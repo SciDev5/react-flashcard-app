@@ -1,0 +1,51 @@
+@import "../../../color.scss";
+
+.EditorPage {
+    h1 {
+        color: $c-f02;
+    }
+    color: $c-f01;
+    button {
+        display: block;
+        width: calc(100% - .4em);
+        padding: .2em;
+        margin: .4em .2em;
+
+        background: $c-b01;
+        color: $c-f01;
+        border: 1px solid $c-f01;
+        transition: 0.25s background-color, 0.25s color, 0.25s border;
+        &:hover {
+            background: $c-f01;
+            color: $c-b01;
+        }
+    }
+    .-EditRow {
+        margin-top: 2em;
+        padding: 0 .7em;
+        .-rowLabel {
+            font-size: .8em;
+            font-weight: bold;
+            color: $c-f02;
+            border: 1px solid $c-e01;
+            border-width: 1px 0px;
+            padding: .2em;
+        }
+        .-EditRowField {
+            display: flex;
+            margin: .2em;
+            * { flex: 1; }
+            label { flex: 0.3; }
+            input, textArea {
+                border: 1px solid $c-f01;
+                color: $c-f01;
+                background: $c-b01;
+                transition: 0.25s background-color;
+                &:hover {
+                    background: $c-b02;
+                }
+            }
+        }
+    }
+}
+

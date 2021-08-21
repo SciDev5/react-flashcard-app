@@ -1,7 +1,7 @@
 import React from "react";
-import { Translation } from "react-i18next";
+import { Trans, Translation } from "react-i18next";
 import { ReactNode } from "react-markdown";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import DeckProgress from "../../../data/flashcard/DeckProgress";
 import FALLBACK_ICON from "./rowIcon/missing.png";
 
@@ -58,6 +58,7 @@ export default class DeckRow extends React.Component<{deck:DeckProgress},{wasCli
                         lastStudy: deck.lastStudied
                     }})}</span>
                 </div>
+                <div className="-editLink"><Link to={`/edit/${data.id}`}><Trans>indexPage.deckRow.edit</Trans></Link></div>
             </div>
         )}</Translation>);
     }
