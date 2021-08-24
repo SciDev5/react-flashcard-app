@@ -1,11 +1,11 @@
 @import "../../../color.scss";
 
 .EditorPage {
-    h1 {
+    h1,h3 {
         color: $c-f02;
     }
     color: $c-f01;
-    button {
+    button, a {
         display: block;
         width: calc(100% - .4em);
         padding: .2em;

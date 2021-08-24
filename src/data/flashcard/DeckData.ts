@@ -1,3 +1,4 @@
+import { v4 as uuidV4 } from "uuid";
 import CardData from "./CardData";
 
 export default interface DeckData {
@@ -5,4 +6,8 @@ export default interface DeckData {
     name: string;
     coverImgURL: string;
     readonly cards: CardData[];
+}
+
+export function genId():string {
+    return uuidV4();
 }

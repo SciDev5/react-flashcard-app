@@ -49,6 +49,11 @@ export default class DeckProgress {
             this._cardsByMode[card.learnMode].push(card);
         }
     }
+    recalculateCardMeta():void {
+        this.recalculateCardsById();
+        this.recalculateCardsByMode();
+        this._startedCardsOrder = this._startedCardsOrder.filter(id=>this.data.cards.some(card=>card.id===id));
+    }
 
     /** Set lastStudied to the current date. */
     updateLastStudied():void {

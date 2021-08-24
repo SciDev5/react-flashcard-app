@@ -5,11 +5,15 @@ import App from "./component/App";
 import "./index.scss";
 import reportWebVitals from "./reportWebVitals";
 import "./i18n";
+import DeckStorage from "./data/DeckStorage";
+
+const deckStorage = new DeckStorage();
+deckStorage.newDeck("test","");
 
 ReactDOM.render(
     <React.StrictMode>
         <BrowserRouter>
-            <App />
+            <App storage={deckStorage} />
         </BrowserRouter>
     </React.StrictMode>,
     document.getElementById("root")

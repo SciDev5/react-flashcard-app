@@ -1,3 +1,5 @@
+import { genId } from "./DeckData";
+
 export interface Data {
     type: "text"|"imageURL",
     data: string
@@ -15,4 +17,15 @@ export default interface CardData {
     reversable: boolean;
     /** More information about the answer (markdown). */
     answerInfo: string;
+}
+
+export function genEmptyCardData():CardData {
+    return {
+        id: genId(),
+        answer: {data:"",type:"text"},
+        question: {data:"",type:"text"},
+        answerInfo: "",
+        priority: 1,
+        reversable: false
+    };
 }

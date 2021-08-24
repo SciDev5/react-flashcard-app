@@ -5,6 +5,21 @@ $s: 70px;
 .IndexPage {
     h1 { color: $c-f02; }
     h3 { color: $c-f01; }
+    .-content > button {
+        display: block;
+        width: calc(100% - .4em);
+        padding: .2em;
+        margin: .4em .2em;
+
+        background: $c-b01;
+        color: $c-f01;
+        border: 1px solid $c-f01;
+        transition: 0.25s background-color, 0.25s color, 0.25s border;
+        &:hover {
+            background: $c-f01;
+            color: $c-b01;
+        }
+    }
 
     .-DeckList {
         border: 1px solid $c-e01;

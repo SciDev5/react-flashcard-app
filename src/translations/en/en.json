@@ -12,6 +12,7 @@
             }
         },
         "flashcard": {
+            "newDeck": "new deck",
             "flipCard": "See answer",
             "nextCard": "Next card",
             "beginNewCard": "Start new card",
@@ -23,7 +24,7 @@
                 "inactive": "Well-known card"
             },
             "answerInfo": {
-                "title": "More informaion:"
+                "title": "More information:"
             },
             "deck404Page": {
                 "title": "Deck not found",
@@ -34,6 +35,7 @@
             "name": "Flashcard Thing"
         },
         "indexPage": {
+            "createDeckButton": "Create new deck",
             "selectDeckHeader": "Select flashcard deck:",
             "deckRow": {
                 "iconAlt": "Deck icon",
@@ -43,10 +45,14 @@
         },
         "editorPage": {
             "title": "Edit deck \"{{name}}\"",
+            "autosaveNote": "The changes you make are automatically saved.",
+            "backToMenu": "Back to main menu.",
             "deck": {
                 "label": "Deck data",
                 "name": "Name:",
-                "imgURL": "Cover image URL:"
+                "imgURL": "Cover image URL:",
+                "del": "Delete this deck",
+                "deckNamed": "deck \"{{name}}\""
             },
             "card": {
                 "label": "Card data",
@@ -59,11 +65,15 @@
                     "a": "Answer is image?:"
                 },
                 "question": "Question [or img url]:",
-                "answer": "Answer [or img url]:"
+                "answer": "Answer [or img url]:",
+                "cardNamed": "this flashcard"
             }
         },
         "header": {
             "mainPageLink": "Main page"
+        },
+        "general": {
+            "confirmDelete": "Are you sure you want to >>DELETE<< {{name}}?"
         }
     }
 }

@@ -2,10 +2,16 @@ import React from "react";
 import { Translation } from "react-i18next";
 import { ReactNode } from "react-markdown";
 import CardData from "../../../data/flashcard/CardData";
+import i18n from "../../../i18n";
 import EditRow from "./EditRow";
 import EditRowField from "./EditRowField";
 
 export default class CardRow extends React.Component<{card:CardData,onChange:(newData:CardData)=>void,onDelete:()=>void}> {
+    readonly firstFieldRef = React.createRef<HTMLElement>();
+    focusFirstField():void {
+        this.firstFieldRef.current?.focus();
+    }
+
     onChangeReversable = (value:boolean):void => {
         const recombinantData = {...this.props.card, reversable: value};
         this.props.onChange(recombinantData);
@@ -24,9 +30,11 @@ export default class CardRow extends React.Component<{card:CardData,onChange:(ne
         const recombinantData = {...this.props.card, [which]: {...dataExisting, data}};
         this.props.onChange(recombinantData);
     }
-    onDelete = (e:React.MouseEvent):void => {
+    onDelete = async (e:React.MouseEvent):Promise<void> => {
         if (!e.isTrusted) return;
-        this.props.onDelete();
+        const t = await i18n;
+        if (confirm(t("general.confirmDelete",{replace:{name:t("editorPage.card.cardNamed")}})))
+            this.props.onDelete();
     };
 
     render():ReactNode {
@@ -34,7 +42,7 @@ export default class CardRow extends React.Component<{card:CardData,onChange:(ne
         return (<Translation>{t=>(
             <EditRow label={t("editorPage.card.label")}>
                 <EditRowField bool label="editorPage.card.reversable" value={card.reversable} onChangeBool={this.onChangeReversable}/>
-                <EditRowField multiline label="editorPage.card.answerInfo" value={card.answerInfo} onChange={this.onChangeAnswerInfo}/>
+                <EditRowField inputRef={this.firstFieldRef} multiline label="editorPage.card.answerInfo" value={card.answerInfo} onChange={this.onChangeAnswerInfo}/>
                 <EditRowField bool label="editorPage.card.isImg.q" value={card.question.type==="imageURL"} onChangeBool={this.onChangeDataType.bind(this,"question")}/>
                 <EditRowField label="editorPage.card.question" value={card.question.data} onChange={this.onChangeDataValue.bind(this,"question")}/>
                 <EditRowField bool label="editorPage.card.isImg.a" value={card.answer.type==="imageURL"} onChangeBool={this.onChangeDataType.bind(this,"answer")}/>
