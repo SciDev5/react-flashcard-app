@@ -8,7 +8,7 @@ import "./i18n";
 import DeckStorage from "./data/DeckStorage";
 
 const deckStorage = new DeckStorage();
-deckStorage.newDeck("test","");
+deckStorage.loadAndInit();
 
 ReactDOM.render(
     <React.StrictMode>

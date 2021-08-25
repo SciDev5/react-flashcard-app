@@ -2,13 +2,14 @@ import React from "react";
 import { Translation } from "react-i18next";
 import { ReactNode } from "react-markdown";
 import DeckData from "../../../data/flashcard/DeckData";
+import { EditDeckFunction } from "./EditorPage";
 import EditRow from "./EditRow";
 import EditRowField from "./EditRowField";
 
-export default class DeckRow extends React.Component<{deck:DeckData,onChange:(newData:DeckData)=>void}> {
+export default class DeckRow extends React.Component<{deck:DeckData,onChange:EditDeckFunction}> {
     onChange(field:keyof DeckData,value:string):void {
         const recombinantData = {...this.props.deck, [field]: value};
-        this.props.onChange(recombinantData);
+        this.props.onChange("edit",recombinantData);
     }
 
     render():ReactNode {

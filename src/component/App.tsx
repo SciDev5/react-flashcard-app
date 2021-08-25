@@ -20,38 +20,58 @@ export default class App extends React.Component<{storage:DeckStorage}> {
 
     onEditCard:EditCardFunction = (deck,op,newData)=>{
         const { storage } = this.props;
+        const dataNullError = new Error("deck needs to be non-null for this operation");
         switch(op) {
         case "new": {
             const card = genEmptyCardData();
             storage.deckAddCard(deck,card);
+            storage.save();
             this.forceUpdate(()=>{
                 this.editPageRef.current?.focusCardRow(card.id);
             });
             break;
         }
         case "edit":
-            if (!newData) break;
+            if (!newData) throw dataNullError;
             storage.deckEditCard(deck,newData);
+            storage.save();
             this.forceUpdate();
             break;
         case "del":
-            storage.deckDelCard(deck,newData?.id ?? "");
+            if (!newData) throw dataNullError;
+            storage.deckDelCard(deck,newData.id);
+            storage.save();
             this.forceUpdate();
             break;
         default: throw new Error("card edit called with unsupported operation");
         }
     };
-    onEditDeck:EditDeckFunction = (newData)=>{
+    onEditDeck:EditDeckFunction = async (op,deckData)=>{
         const { storage } = this.props;
-        storage.deckEdit(newData);
-        this.forceUpdate();
+        const dataNullError = new Error("deck needs to be non-null for this operation");
+        switch(op) {
+        case "new":
+            storage.newDeck((await i18n)("flashcard.newDeck"),"");
+            storage.save();
+            this.forceUpdate();
+            break;
+        case "edit":
+            if (!deckData) throw dataNullError;
+            storage.deckEdit(deckData);
+            storage.save();
+            this.forceUpdate();
+            break;
+        case "del":
+            if (!deckData) throw dataNullError;
+            storage.deckDel(deckData.id);
+            storage.save();
+            break;
+        default: throw new Error("card edit called with unsupported operation");
+        }
     };
-    onCreateDeck = async ():Promise<void>=>{
-        this.props.storage.newDeck((await i18n)("flashcard.newDeck"),"");
-        this.forceUpdate();
-    };
-    onDeleteDeck:EditDeckFunction = (deck):void=>{
-        this.props.storage.deckDel(deck.id);
+
+    onProgressChange = ():void=>{
+        this.props.storage.save(true);
     };
 
     render():ReactNode {
@@ -62,7 +82,7 @@ export default class App extends React.Component<{storage:DeckStorage}> {
                 <Header/>
                 <Switch>
                     <Route path="/" exact>
-                        <IndexPage decks={decks} onCreateDeck={this.onCreateDeck}/>
+                        <IndexPage decks={decks} onCreateDeck={this.onEditDeck.bind(this,"new")}/>
                     </Route>
                     <Route path="/flashcard/:setId/:cardId" exact>
                         <FlashcardPage decks={decks} />
@@ -71,7 +91,7 @@ export default class App extends React.Component<{storage:DeckStorage}> {
                         <FlashcardRandCardRedirect decks={decks} />
                     </Route>
                     <Route path="/edit/:setId" exact>
-                        <EditorPage decks={decks} onEditCard={this.onEditCard} onEditDeck={this.onEditDeck} onDeleteDeck={this.onDeleteDeck} classRef={this.editPageRef} />
+                        <EditorPage decks={decks} onEditCard={this.onEditCard} onEditDeck={this.onEditDeck} classRef={this.editPageRef} />
                     </Route>
                     <Route>
                         404 TODO

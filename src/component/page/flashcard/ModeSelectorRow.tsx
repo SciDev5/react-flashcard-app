@@ -8,6 +8,7 @@ export default class ModeSelectorRow extends React.Component<{card:CardProgress,
     onSetMode(mode:LearnMode):void {
         this.props.card.learnMode = mode;
         this.props.deck.recalculateCardsByMode();
+        this.props.deck.callProgressCallback();
         this.forceUpdate();
     }
     

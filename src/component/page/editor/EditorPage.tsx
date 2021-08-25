@@ -13,20 +13,20 @@ import DeckRow from "./DeckRow";
 import "./EditorPage.scss";
 
 export type EditCardFunction = (deck:DeckProgress,op:"new"|"edit"|"del",newData?:CardData)=>void;
-export type EditDeckFunction = (newData:DeckData)=>void;
+export type EditDeckFunction = (op:"new"|"edit"|"del",newData?:DeckData)=>void;
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
-function EditorPage(props:{decks:DeckProgress[],onEditCard:EditCardFunction,onEditDeck:EditDeckFunction,onDeleteDeck:EditDeckFunction,classRef:RefObject<EditorPageClass>}):JSX.Element {
+function EditorPage(props:{decks:DeckProgress[],onEditCard:EditCardFunction,onEditDeck:EditDeckFunction,classRef:RefObject<EditorPageClass>}):JSX.Element {
     const {setId} = useParams<{setId:string}>();
     const deck = props.decks.find(v=>v.data.id===setId);
     // Redirect if card or deck is missing, otherwise render the page.
     if (!deck) 
         return <Deck404Page setId={setId}/>;
     else
-        return <EditorPageClass deck={deck} onEditCard={props.onEditCard} onEditDeck={props.onEditDeck} onDeleteDeck={props.onDeleteDeck} ref={props.classRef}/>;
+        return <EditorPageClass deck={deck} onEditCard={props.onEditCard} onEditDeck={props.onEditDeck} ref={props.classRef}/>;
 }
 
-export class EditorPageClass extends React.Component<{deck:DeckProgress,onEditCard:EditCardFunction,onEditDeck:EditDeckFunction,onDeleteDeck:EditDeckFunction},{deletedRedirect?:boolean}> {
+export class EditorPageClass extends React.Component<{deck:DeckProgress,onEditCard:EditCardFunction,onEditDeck:EditDeckFunction},{deletedRedirect?:boolean}> {
     constructor(props:EditorPageClass["props"]) {
         super(props);
         this.state = {};
@@ -44,7 +44,7 @@ export class EditorPageClass extends React.Component<{deck:DeckProgress,onEditCa
         const t = await i18n,
             name = t("editorPage.deck.deckNamed",{replace:{name:this.props.deck.data.name}});
         if (confirm(t("general.confirmDelete",{replace:{name}}))) {
-            this.props.onDeleteDeck(this.props.deck.data);
+            this.props.onEditDeck("del",this.props.deck.data);
             this.setState({deletedRedirect:true});
         }
     };

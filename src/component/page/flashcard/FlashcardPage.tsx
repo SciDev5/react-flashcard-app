@@ -10,19 +10,21 @@ import "./FlashcardPage.scss";
 import AnswerInfoRow from "./AnswerInfoRow";
 import ModeSelectorRow from "./ModeSelectorRow";
 
-type PropsType = {decks: DeckProgress[]};
 
 /** A wrapper function which forwards the url information to FlashcardPageClass */
 // eslint-disable-next-line @typescript-eslint/naming-convention
-function FlashcardPage(props:PropsType):JSX.Element {
+function FlashcardPage(props:{decks: DeckProgress[]}):JSX.Element {
     const {cardId,setId} = useParams<{cardId:string,setId:string}>();
     const deck = props.decks.find(v=>v.data.id===setId),
         card = deck?.getCardById(cardId);
     // Redirect if card or deck is missing, otherwise render the page.
     if (!deck || !card) 
         return <FlashcardRandCardRedirect decks={props.decks}/>;
-    else
-        return <FlashcardPageClass deck={deck} card={card} />;
+    else {
+        return (
+            <FlashcardPageClass deck={deck} card={card}/>
+        );
+    }
 }
 
 class FlashcardPageClass extends React.Component<{deck:DeckProgress,card:CardProgress}, {flipped:boolean,next?:string,attemptReverse:boolean}> {

@@ -1,8 +1,10 @@
 import { weightedRandom } from "../../util/arrayUtil";
-import CardProgress, { LearnMode as LearnCategory } from "./CardProgress";
+import CardProgress, { CardProgressData, LearnMode as LearnCategory } from "./CardProgress";
 import DeckData from "./DeckData";
 
 const STARTING_CARDS = 5;
+
+export type DeckProgressData = {id:string,cards:CardProgressData[],startedCardsOrder:string[],lastStudied?:number};
 
 export default class DeckProgress {
     private _cardsByMode:{[key in LearnCategory]: CardProgress[]} = {activeLearning:[],activeReminder:[],inactive:[]};
@@ -58,6 +60,13 @@ export default class DeckProgress {
     /** Set lastStudied to the current date. */
     updateLastStudied():void {
         this._lastStudied = new Date();
+        this.callProgressCallback();
+    }
+    setLastStudied(timeValue?:number):void {
+        if (timeValue === undefined)
+            this._lastStudied = undefined;
+        else
+            this._lastStudied = new Date(timeValue);
     }
 
     /** Check if there are any cards to begin */
@@ -141,6 +150,17 @@ export default class DeckProgress {
             .map(([mode]) => mode) as LearnCategory[];
         // Randomly select one based on this.modeWeights
         return weightedRandom(modes.map(mode=>({value:mode,weight:this.modeWeights[mode]})));
+    }
+
+    _progressCallback?:()=>void;
+    setProgressCallback(callback:()=>void):void {
+        this._progressCallback = callback;
+    }
+    clearProgressCallback():void {
+        delete this._progressCallback;
+    }
+    callProgressCallback():void {
+        this._progressCallback?.call(this);
     }
 
 }
